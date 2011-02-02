@@ -22,8 +22,7 @@
  *
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.xwiki.platform.applications</groupId>
@@ -32,14 +31,14 @@
   </parent>
   <groupId>org.xwiki.contrib</groupId>
   <artifactId>xwiki-application-ldaptools</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>xar</packaging>
   <name>XWiki Platform - Applications - LDAP Tools</name>
   <description>Enables LDAP administration from the wiki administration interface. Proposes a automatic synchronization tool (Starting with XE 3.0+).</description>
   <scm>
-    <connection>scm:svn:http://svn.xwiki.org/svnroot/xwiki/contrib/projects/xwiki-application-ldaptools/trunk/</connection>
-     <developerConnection>scm:svn:https://svn.xwiki.org/svnroot/xwiki/contrib/projects/xwiki-application-ldaptools/trunk/</developerConnection>
-    <url>http://svn.xwiki.org/svnroot/xwiki/contrib/projects/xwiki-application-ldaptools/trunk/</url>
+    <connection>scm:svn:http://svn.xwiki.org/svnroot/xwiki/contrib/projects/xwiki-application-ldaptools/tags/xwiki-application-ldaptools-1.0</connection>
+     <developerConnection>scm:svn:https://svn.xwiki.org/svnroot/xwiki/contrib/projects/xwiki-application-ldaptools/tags/xwiki-application-ldaptools-1.0</developerConnection>
+    <url>http://svn.xwiki.org/svnroot/xwiki/contrib/projects/xwiki-application-ldaptools/tags/xwiki-application-ldaptools-1.0</url>
   </scm>
   <distributionManagement>
     <repository>

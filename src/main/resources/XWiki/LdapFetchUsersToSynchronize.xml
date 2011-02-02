@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwikidoc>
+<web>XWiki</web>
+<name>LdapFetchUsersToSynchronize</name>
+<language></language>
+<defaultLanguage>en</defaultLanguage>
+<translation>0</translation>
+<parent>Scheduler.WebHome</parent>
+<creator>XWiki.jvelociter</creator>
+<author>XWiki.Admin</author>
+<customClass></customClass>
+<contentAuthor>XWiki.Admin</contentAuthor>
+<creationDate>1296582106000</creationDate>
+<date>1296660497000</date>
+<contentUpdateDate>1296660497000</contentUpdateDate>
+<version>20.1</version>
+<title>Scheduler job that fetches the LDAP accounts to synchronize</title>
+<template></template>
+<defaultTemplate></defaultTemplate>
+<validationScript></validationScript>
+<comment></comment>
+<minorEdit>false</minorEdit>
+<syntaxId>xwiki/2.0</syntaxId>
+<hidden>false</hidden>
+<object>
+<class>
+<name>XWiki.RequiredRightClass</name>
+<customClass></customClass>
+<customMapping></customMapping>
+<defaultViewSheet></defaultViewSheet>
+<defaultEditSheet></defaultEditSheet>
+<defaultWeb></defaultWeb>
+<nameField></nameField>
+<validationScript></validationScript>
+<right>
+<cache>0</cache>
+<disabled>0</disabled>
+<displayType>select</displayType>
+<multiSelect>0</multiSelect>
+<name>right</name>
+<number>1</number>
+<picker>0</picker>
+<prettyName>right</prettyName>
+<relationalStorage>0</relationalStorage>
+<separator> </separator>
+<separators> ,|</separators>
+<size>1</size>
+<sort>none</sort>
+<unmodifiable>0</unmodifiable>
+<validationMessage></validationMessage>
+<validationRegExp></validationRegExp>
+<values>programming|edit</values>
+<classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+</right>
+</class>
+<name>XWiki.LdapFetchUsersToSynchronize</name>
+<number>0</number>
+<className>XWiki.RequiredRightClass</className>
+<guid>a037a617-abfa-4065-a31c-2874f6d27a05</guid>
+<property>
+<right>programming</right>
+</property>
+</object>
+<object>
+<class>
+<name>XWiki.SchedulerJobClass</name>
+<customClass></customClass>
+<customMapping></customMapping>
+<defaultViewSheet></defaultViewSheet>
+<defaultEditSheet></defaultEditSheet>
+<defaultWeb></defaultWeb>
+<nameField></nameField>
+<validationScript></validationScript>
+<contextDatabase>
+<disabled>0</disabled>
+<name>contextDatabase</name>
+<number>9</number>
+<prettyName>Job execution context database</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</contextDatabase>
+<contextLang>
+<disabled>0</disabled>
+<name>contextLang</name>
+<number>8</number>
+<prettyName>Job execution context lang</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</contextLang>
+<contextUser>
+<disabled>0</disabled>
+<name>contextUser</name>
+<number>7</number>
+<prettyName>Job execution context user</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</contextUser>
+<cron>
+<disabled>0</disabled>
+<name>cron</name>
+<number>5</number>
+<prettyName>Cron Expression</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</cron>
+<jobClass>
+<disabled>0</disabled>
+<name>jobClass</name>
+<number>3</number>
+<prettyName>Job Class</prettyName>
+<size>60</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</jobClass>
+<jobDescription>
+<disabled>0</disabled>
+<name>jobDescription</name>
+<number>2</number>
+<prettyName>Job Description</prettyName>
+<rows>10</rows>
+<size>45</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+</jobDescription>
+<jobName>
+<disabled>0</disabled>
+<name>jobName</name>
+<number>1</number>
+<prettyName>Job Name</prettyName>
+<size>60</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</jobName>
+<script>
+<disabled>0</disabled>
+<editor>PureText</editor>
+<name>script</name>
+<number>6</number>
+<prettyName>Job Script</prettyName>
+<rows>10</rows>
+<size>60</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+</script>
+<status>
+<disabled>0</disabled>
+<name>status</name>
+<number>4</number>
+<prettyName>Status</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</status>
+</class>
+<name>XWiki.LdapFetchUsersToSynchronize</name>
+<number>0</number>
+<className>XWiki.SchedulerJobClass</className>
+<guid>2eb75179-67c7-41fb-841b-41bd2ce6b0f5</guid>
+<property>
+<contextDatabase>xwiki</contextDatabase>
+</property>
+<property>
+<contextLang>en</contextLang>
+</property>
+<property>
+<contextUser>XWiki.Admin</contextUser>
+</property>
+<property>
+<cron>0 0 2 * * ?</cron>
+</property>
+<property>
+<jobClass>com.xpn.xwiki.plugin.scheduler.GroovyJob</jobClass>
+</property>
+<property>
+<jobDescription>Fetches users to synchronize as defined in the LDAP section of the administration and store them in a a page. Another job is responsible for the actual synchronization of users.</jobDescription>
+</property>
+<property>
+<jobName>Fetch LDAP users to synchronize</jobName>
+</property>
+<property>
+<script>/**
+ * Scheduler job that :
+ * - Search for the list of groups to synchronize. That is :
+ * 1. All groups from the LDAP/XWiki group mapping IF the property ldap_sync_group_mapping is set to true,
+ * 2. All other groups listed in ldap_sync_extra_groups (pipe separated)
+ * - Queries the configured LDAP to get all members from all this groups, and write their DN in the document defined for that purpose (see "ldap_sync_list_page"), separated by a line return.
+ *
+ * This job IS NOT responsible for the actual account synchronization, this is taken care of by another job.
+ */
+
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPConfig;
+import com.xpn.xwiki.XWikiException;
+import com.xpn.xwiki.doc.XWikiDocument;
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPConfig;
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPConnection;
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPSearchAttribute;
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPUtils;
+
+
+// Constants
+//////////////////////////////////////////////////////////////////////
+
+def LDAP_DEFAULT_UID = "cn";
+
+// Get configuration elements
+//////////////////////////////////////////////////////////////////////
+
+// Get the LDAP config instance
+def config = XWikiLDAPConfig.getInstance()
+
+// Get the document where to log LDAP synchronization info
+def logDocument = xwiki.getDocument(xwiki.getXWikiPreference("ldap_sync_log_page", "XWiki.LdapSynchronizationLog"))
+
+// Get the document where to store the list of accounts that should be synchronized.
+def listDocument = xwiki.getDocument(xwiki.getXWikiPreference("ldap_sync_list_page", "XWiki.LdapAccountsToSynchronize"))
+
+// Get the group mapping
+def groupsInMapping = config.getGroupMappings(xcontext).values().flatten().unique()
+
+// Get the property that says if groups in mapping should all be synchronized
+def synchronizeGroupMapping = xwiki.getXWikiPreference("ldap_sync_group_mapping") == "1" ? true : false;
+
+// Get the property that says if a non empty list should be overridden
+def overrideNonEmptyList = xwiki.getXWikiPreference("ldap_override_non_empty_sync_list") == "1" ? true : false;
+
+// Determine if the list is currently empty
+def listIsEmpty = listDocument.isNew() || listDocument.content.trim() == ''
+
+// Get the extra groups to synchronize
+def extraGroups = xwiki.getXWikiPreference("ldap_sync_extra_groups").tokenize('\n').unique()
+
+// Constructs the groups to synchronize
+def groupsToSynchronize = extraGroups;
+if (synchronizeGroupMapping) {
+  groupsToSynchronize.addAll(groupsInMapping)
+}
+
+def logMessage = """
+== Synchronization parameters ==
+
+* Synchronization started at **${new Date().toLocaleString()}**
+* Is default groups mapping synchronization active ? ${synchronizeGroupMapping ? "**yes**" : "**no**"} 
+* Override non empty list : ${overrideNonEmptyList ? "**yes**" : "**no**"}
+* Synchronization list is empty : ${listIsEmpty ? "**yes**" : "**no**"}
+
+== Groups to synchronize
+
+* ${groupsToSynchronize.join("\n* ")}
+
+"""
+
+// Do retrieve the list of accounts to sync
+//////////////////////////////////////////////////////////////////////
+
+XWikiLDAPConnection connector = new XWikiLDAPConnection();
+XWikiLDAPUtils ldapUtils = new XWikiLDAPUtils(connector);
+
+ldapUtils.setUidAttributeName(config.getLDAPParam(XWikiLDAPConfig.PREF_LDAP_UID, LDAP_DEFAULT_UID, context));
+ldapUtils.setGroupClasses(config.getGroupClasses(context));
+ldapUtils.setGroupMemberFields(config.getGroupMemberFields(context));
+ldapUtils.setBaseDN(config.getLDAPParam("ldap_base_DN", "", context));
+ldapUtils.setUserSearchFormatString(config.getLDAPParam("ldap_user_search_fmt", "({0}={1})", context));
+
+String bindDN = config.getLDAPBindDN(context);
+String password = config.getLDAPBindPassword(context);
+
+def list = ''
+
+
+try {
+  if (!connector.open(bindDN, password, context)) {
+    logMessage += """
+{{error}}
+Could not bind to LDAP server. Accounts to synchronize have NOT been retrieved
+{{/error}}
+
+"""
+  }
+  else {
+    def allGroupsMembers = [:]
+
+    groupsToSynchronize.each {
+      allGroupsMembers.putAll(ldapUtils.getGroupMembers(it, context) ? ldapUtils.getGroupMembers(it, context) : [:])
+    }
+
+    if (allGroupsMembers != null) {
+      for (String member : allGroupsMembers.keySet()) {
+        String ldapDn = member;
+        String ldapUid = allGroupsMembers.get(member);
+        list += "${ldapUid}=${ldapDn}\n"
+      }
+      logMessage += """
+{{info}}
+Found ${allGroupsMembers.keySet().size()} accounts to check for synchronization, dumped to [[${listDocument.fullName}]].
+{{/info}}
+"""
+    }
+    else {
+      logMessage += """
+{{warning}}
+An error occured while getting the list of users to synchronize : **${e.message}**
+{{/warning}}
+"""
+    }
+
+  }
+
+} catch (XWikiException e) {
+    logMessage += """
+{{error}}
+An error occured while getting the list of users to synchronize : **${e.message}**
+{{/error}}
+
+"""
+}
+
+// Finish : write log file and account list file
+//////////////////////////////////////////////////////////////////////
+
+logMessage += """
+== Synchronization batches logs ==
+"""
+
+logDocument.setContent(logMessage)
+logDocument.setParent("XWiki.LdapFetchUsersToSynchronize")
+logDocument.setTitle("LDAP synchronization log")
+logDocument.save()
+
+if (list != '' &amp;&amp; (listIsEmpty || overrideNonEmptyList)) {
+  listDocument.setContent(list)
+  listDocument.setParent("XWiki.LdapFetchUsersToSynchronize")
+  listDocument.setTitle("Accounts to synchronize")
+  listDocument.save()
+}</script>
+</property>
+<property>
+<status>Normal</status>
+</property>
+</object>
+<content>{{include document="XWiki.SchedulerJobSheet"/}}</content></xwikidoc>

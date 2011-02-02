@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwikidoc>
+<web>XWiki</web>
+<name>AdminLdapSyncSheet</name>
+<language></language>
+<defaultLanguage>en</defaultLanguage>
+<translation>0</translation>
+<parent></parent>
+<creator>XWiki.jvelociter</creator>
+<author>XWiki.Admin</author>
+<customClass></customClass>
+<contentAuthor>XWiki.Admin</contentAuthor>
+<creationDate>1296569967000</creationDate>
+<date>1296660560000</date>
+<contentUpdateDate>1296660560000</contentUpdateDate>
+<version>26.1</version>
+<title></title>
+<template></template>
+<defaultTemplate></defaultTemplate>
+<validationScript></validationScript>
+<comment></comment>
+<minorEdit>false</minorEdit>
+<syntaxId>xwiki/2.0</syntaxId>
+<hidden>false</hidden>
+<object>
+<class>
+<name>XWiki.RequiredRightClass</name>
+<customClass></customClass>
+<customMapping></customMapping>
+<defaultViewSheet></defaultViewSheet>
+<defaultEditSheet></defaultEditSheet>
+<defaultWeb></defaultWeb>
+<nameField></nameField>
+<validationScript></validationScript>
+<right>
+<cache>0</cache>
+<disabled>0</disabled>
+<displayType>select</displayType>
+<multiSelect>0</multiSelect>
+<name>right</name>
+<number>1</number>
+<picker>0</picker>
+<prettyName>right</prettyName>
+<relationalStorage>0</relationalStorage>
+<separator> </separator>
+<separators> ,|</separators>
+<size>1</size>
+<sort>none</sort>
+<unmodifiable>0</unmodifiable>
+<validationMessage></validationMessage>
+<validationRegExp></validationRegExp>
+<values>programming|edit</values>
+<classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+</right>
+</class>
+<name>XWiki.AdminLdapSyncSheet</name>
+<number>0</number>
+<className>XWiki.RequiredRightClass</className>
+<guid>a70008e6-4070-4178-bdee-e5253d42bed9</guid>
+<property>
+<right>programming</right>
+</property>
+</object>
+<content>{{groovy}}
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPUtils;
+import com.xpn.xwiki.doc.XWikiDocument;
+
+// LDAP sync is supported since XWIKI-4885.
+def isSyncSupported = XWikiLDAPUtils.metaClass.methods.find { it.name.equals("syncUser") } ? true : false
+
+if (isSyncSupported) {
+
+  // Get internal XWiki object. We can't call xwiki.getXWiki() since this one does a PR check, and permissions are dropped when we get executed from the Admin via ConfigurableClass
+  def xwiki = xwiki.@xwiki
+
+  // Make sure XWiki.XWikiPreferences is up-to-date
+
+  boolean needsUpdate = false;
+
+  def prefDoc;
+  try {
+    prefDoc = xwiki.getDocument("XWiki.XWikiPreferences", xcontext.@context);
+  } catch (Exception e) {
+    prefDoc = new XWikiDocument();
+    prefDoc.setFullName("XWiki.XWikiPreferences");
+    needsUpdate = true;
+  }
+
+  def bclass = prefDoc.getxWikiClass();
+  needsUpdate |= bclass.addBooleanField("ldap_sync_group_mapping", "Synchronize groups defined in the LDAP group mapping", "checkbox")
+  needsUpdate |= bclass.addTextField("ldap_sync_list_page", "Page to use for storing the list of accounts that remains to be synchronized (default is XWiki.LdapAccountsToSynchronize)", 60)
+  needsUpdate |= bclass.addTextField("ldap_sync_log_page", "Page to use for writing the synchronization logs (default is XWiki.LdapSynchronizationLog)", 60)
+  needsUpdate |= bclass.addTextAreaField("ldap_sync_extra_groups", "Other groups to synchronize", 80, 10)
+  needsUpdate |= bclass.addBooleanField("ldap_override_non_empty_sync_list", "Override the synchronization list when non empty", "checkbox")
+  needsUpdate |= bclass.addNumberField("ldap_sync_batch_size","Number of accounts to synchronize per batch (default is 100)", 30, "integer")
+
+  if (needsUpdate) {
+    try {
+      xwiki.saveDocument(prefDoc, xcontext.@context);
+      println """
+{{info}}
+XWiki.XWikiPreferences class has been upgraded to support LDAP synchronization settings.
+{{/info}}
+"""
+    } catch (ex) {
+println """
+{{error}}
+An error occurred while updating the preferences object : ${ex.message}
+{{/error}}
+"""
+    // Something is fishy. Don't go further and display the props : it will probably not work
+    isSyncSupported = false
+    }
+  }
+}
+
+xcontext.@context.put("is_ldap_sync_supported", isSyncSupported)
+
+if (!xcontext.@context.get("is_ldap_sync_supported")) {
+  // Big hack. We hide the blocks to come.
+  println """
+{{html clean="false"}}
+&lt;div class="hidden"&gt;
+{{/html}}
+"""
+}
+
+{{/groovy}}
+
+{{velocity output="false"}}
+#set($legend = ['general'])
+#set($params = $util.hashMap)
+#set($params.general = ['ldap_sync_group_mapping', 'ldap_sync_extra_groups', 'ldap_sync_list_page', 'ldap_sync_log_page', 'ldap_override_non_empty_sync_list', 'ldap_sync_batch_size'])
+{{/velocity}}
+
+== LDAP synchronization settings ==
+
+{{include document="XWiki.AdminFieldsDisplaySheet" /}}
+
+{{groovy}}
+if (!xcontext.@context.get("is_ldap_sync_supported")) {
+  // we close the hidden block
+println """
+{{html clean="false"}}
+&lt;/div&gt;
+{{/html}}
+"""
+}
+{{/groovy}}</content></xwikidoc>

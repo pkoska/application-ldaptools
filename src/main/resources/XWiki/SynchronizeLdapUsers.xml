@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xwikidoc>
+<web>XWiki</web>
+<name>SynchronizeLdapUsers</name>
+<language></language>
+<defaultLanguage>en</defaultLanguage>
+<translation>0</translation>
+<parent>Scheduler.WebHome</parent>
+<creator>XWiki.Admin</creator>
+<author>XWiki.Admin</author>
+<customClass></customClass>
+<contentAuthor>XWiki.Admin</contentAuthor>
+<creationDate>1296643088000</creationDate>
+<date>1296660514000</date>
+<contentUpdateDate>1296660514000</contentUpdateDate>
+<version>9.1</version>
+<title>Scheduler job that synchronize LDAP users</title>
+<template></template>
+<defaultTemplate></defaultTemplate>
+<validationScript></validationScript>
+<comment></comment>
+<minorEdit>false</minorEdit>
+<syntaxId>xwiki/2.0</syntaxId>
+<hidden>false</hidden>
+<object>
+<class>
+<name>XWiki.RequiredRightClass</name>
+<customClass></customClass>
+<customMapping></customMapping>
+<defaultViewSheet></defaultViewSheet>
+<defaultEditSheet></defaultEditSheet>
+<defaultWeb></defaultWeb>
+<nameField></nameField>
+<validationScript></validationScript>
+<right>
+<cache>0</cache>
+<disabled>0</disabled>
+<displayType>select</displayType>
+<multiSelect>0</multiSelect>
+<name>right</name>
+<number>1</number>
+<picker>0</picker>
+<prettyName>right</prettyName>
+<relationalStorage>0</relationalStorage>
+<separator> </separator>
+<separators> ,|</separators>
+<size>1</size>
+<sort>none</sort>
+<unmodifiable>0</unmodifiable>
+<validationMessage></validationMessage>
+<validationRegExp></validationRegExp>
+<values>programming|edit</values>
+<classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+</right>
+</class>
+<name>XWiki.SynchronizeLdapUsers</name>
+<number>0</number>
+<className>XWiki.RequiredRightClass</className>
+<guid>d0de3e09-518b-4a0a-ac89-c3c2a098fbbc</guid>
+<property>
+<right>programming</right>
+</property>
+</object>
+<object>
+<class>
+<name>XWiki.SchedulerJobClass</name>
+<customClass></customClass>
+<customMapping></customMapping>
+<defaultViewSheet></defaultViewSheet>
+<defaultEditSheet></defaultEditSheet>
+<defaultWeb></defaultWeb>
+<nameField></nameField>
+<validationScript></validationScript>
+<contextDatabase>
+<disabled>0</disabled>
+<name>contextDatabase</name>
+<number>9</number>
+<prettyName>Job execution context database</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</contextDatabase>
+<contextLang>
+<disabled>0</disabled>
+<name>contextLang</name>
+<number>8</number>
+<prettyName>Job execution context lang</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</contextLang>
+<contextUser>
+<disabled>0</disabled>
+<name>contextUser</name>
+<number>7</number>
+<prettyName>Job execution context user</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</contextUser>
+<cron>
+<disabled>0</disabled>
+<name>cron</name>
+<number>5</number>
+<prettyName>Cron Expression</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</cron>
+<jobClass>
+<disabled>0</disabled>
+<name>jobClass</name>
+<number>3</number>
+<prettyName>Job Class</prettyName>
+<size>60</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</jobClass>
+<jobDescription>
+<disabled>0</disabled>
+<name>jobDescription</name>
+<number>2</number>
+<prettyName>Job Description</prettyName>
+<rows>10</rows>
+<size>45</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+</jobDescription>
+<jobName>
+<disabled>0</disabled>
+<name>jobName</name>
+<number>1</number>
+<prettyName>Job Name</prettyName>
+<size>60</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</jobName>
+<script>
+<disabled>0</disabled>
+<editor>PureText</editor>
+<name>script</name>
+<number>6</number>
+<prettyName>Job Script</prettyName>
+<rows>10</rows>
+<size>60</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+</script>
+<status>
+<disabled>0</disabled>
+<name>status</name>
+<number>4</number>
+<prettyName>Status</prettyName>
+<size>30</size>
+<unmodifiable>0</unmodifiable>
+<classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+</status>
+</class>
+<name>XWiki.SynchronizeLdapUsers</name>
+<number>0</number>
+<className>XWiki.SchedulerJobClass</className>
+<guid>ba6a84d3-7055-4096-a996-8f17b0fb799d</guid>
+<property>
+<contextDatabase>xwiki</contextDatabase>
+</property>
+<property>
+<contextLang>en</contextLang>
+</property>
+<property>
+<contextUser>XWiki.Admin</contextUser>
+</property>
+<property>
+<cron>0 0/5 * * * ? </cron>
+</property>
+<property>
+<jobClass>com.xpn.xwiki.plugin.scheduler.GroovyJob</jobClass>
+</property>
+<property>
+<jobDescription>This jobs takes the synchronization list document (as defined in the LDAP section of the administration), and if this one is not empty, iterates over N entries, and synchronize them. N is the size of a synchronization batch and is also defined in the administration</jobDescription>
+</property>
+<property>
+<jobName>Synchronize LDAP users</jobName>
+</property>
+<property>
+<script>/**
+ * This jobs takes the synchronization list document (as defined in the LDAP section of the administration), and if this one is not empty, iterates over N entries, and synchronize them. N is the size of a synchronization batch and is also defined in the administration.
+ */
+
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPConfig;
+import com.xpn.xwiki.XWikiException;
+import com.xpn.xwiki.doc.XWikiDocument;
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPConfig;
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPConnection;
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPSearchAttribute;
+import com.xpn.xwiki.plugin.ldap.XWikiLDAPUtils;
+
+
+// Constants
+//////////////////////////////////////////////////////////////////////
+
+def LDAP_DEFAULT_UID = "cn";
+
+// Get configuration elements
+//////////////////////////////////////////////////////////////////////
+
+// Get the LDAP config instance
+def config = XWikiLDAPConfig.getInstance()
+
+// Get the document where to log LDAP synchronization info
+def logDocument = xwiki.getDocument(xwiki.getXWikiPreference("ldap_sync_log_page", "XWiki.LdapSynchronizationLog"))
+
+// Get the document where to store the list of accounts that should be synchronized.
+def listDocument = xwiki.getDocument(xwiki.getXWikiPreference("ldap_sync_list_page", "XWiki.LdapAccountsToSynchronize"))
+
+// Determine if the list is currently empty
+def listIsEmpty = listDocument.isNew() || listDocument.content.trim() == ''
+
+// Get the batch size
+def batchSize = xwiki. getXWikiPreferenceAsInt("ldap_sync_batch_size", 100)
+
+// Get current log message
+def logMessage = logDocument.content
+
+if (listIsEmpty) {
+
+   // Nothing to do. We stop here
+
+}
+else {
+
+    // Synchronize one batch
+    //////////////////////////////////////////////////////////////////////
+
+    XWikiLDAPConnection connector = new XWikiLDAPConnection();
+    XWikiLDAPUtils ldapUtils = new XWikiLDAPUtils(connector);
+
+    ldapUtils.setUidAttributeName(config.getLDAPParam(XWikiLDAPConfig.PREF_LDAP_UID, LDAP_DEFAULT_UID, context));
+    ldapUtils.setGroupClasses(config.getGroupClasses(context));
+    ldapUtils.setGroupMemberFields(config.getGroupMemberFields(context));
+    ldapUtils.setBaseDN(config.getLDAPParam("ldap_base_DN", "", context));
+    ldapUtils.setUserSearchFormatString(config.getLDAPParam("ldap_user_search_fmt", "({0}={1})", context));
+
+    String bindDN = config.getLDAPBindDN(context);
+    String password = config.getLDAPBindPassword(context);
+
+    // There are some accounts remaining  to synchronize. Let's get busy.
+    def accounts = new Properties()
+    accounts.load(new ByteArrayInputStream(listDocument.content.bytes))
+
+    try {
+      if (!connector.open(bindDN, password, context)) {
+        logMessage += """
+{{error}}
+Could not bind to LDAP server. Accounts to synchronize have NOT been retrieved
+{{/error}}
+"""
+      }
+     else {
+       def synced = 0
+       def keysToRemove = []
+       accounts.keySet().eachWithIndex { uid, i-&gt;
+         if (i &lt; batchSize) {
+           def DN = accounts.get(uid)
+           def searchAttributes =
+                        ldapUtils.searchUserAttributesByUid(uid, ldapUtils.getAttributeNameTable(context));
+           def userProfile =
+                        ldapUtils.getUserProfileByUid(uid.replace(".", ''), uid, context);
+
+           ldapUtils.syncUser(userProfile, searchAttributes, DN, uid, context);
+
+           keysToRemove.add(uid)
+
+           synced++
+         }
+       }
+      if (synced &gt; 0) {
+        for (key in keysToRemove) {
+          accounts.remove(key)
+        }
+        def content = new StringBuilder()
+        for (account in accounts.keySet()) {
+          content.append(account + "=" + accounts.get(account) + "\n")
+        }
+        listDocument.setContent(content.toString())
+        listDocument.save()
+      }
+      logMessage += """
+* Synchronized **${synced}** accounts at ${new Date().toLocaleString()}
+"""
+    }
+
+    } catch (XWikiException e) {
+      logMessage += """
+{{error}}
+An error occured while getting the list of users to synchronize : **${e.message}**
+{{/error}}
+"""
+    }
+
+  logDocument.setContent(logMessage)
+  logDocument.save()
+
+}
+
+</script></property><property><status>Normal</status>
+</property>
+</object>
+<content>{{include document="XWiki.SchedulerJobSheet"/}}</content></xwikidoc>

@@ -179,7 +179,7 @@
 <jobDescription>Fetches users to synchronize as defined in the LDAP section of the administration and store them in a a page. Another job is responsible for the actual synchronization of users.</jobDescription>
 </property>
 <property>
-<jobName>Fetch LDAP users to synchronize</jobName>
+<jobName>Start LDAP synchronization cycle</jobName>
 </property>
 <property>
 <script>/**

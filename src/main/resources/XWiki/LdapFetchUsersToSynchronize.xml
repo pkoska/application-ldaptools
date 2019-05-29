@@ -182,32 +182,29 @@
 <jobName>Start LDAP synchronization cycle</jobName>
 </property>
 <property>
-<script>/**
+<script>/*
  * Scheduler job that :
  * - Search for the list of groups to synchronize. That is :
  * 1. All groups from the LDAP/XWiki group mapping IF the property ldap_sync_group_mapping is set to true,
  * 2. All other groups listed in ldap_sync_extra_groups (pipe separated)
  * - Queries the configured LDAP to get all members from all this groups, and write their DN in the document defined for that purpose (see "ldap_sync_list_page"), separated by a line return.
  *
- * This job IS NOT responsible for the actual account synchronization, this is taken care of by another job.
+ * This job IS NOT responsible for the actual account synchronization, this is taken care of by the SynchronizeLdapUsers job.
  */
 
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPConfig;
 import com.xpn.xwiki.XWikiException;
 import com.xpn.xwiki.doc.XWikiDocument;
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPConfig;
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPConnection;
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPSearchAttribute;
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPUtils;
+import org.xwiki.contrib.ldap.XWikiLDAPConfig;
+import org.xwiki.contrib.ldap.XWikiLDAPConnection;
+import org.xwiki.contrib.ldap.XWikiLDAPSearchAttribute;
+import org.xwiki.contrib.ldap.XWikiLDAPUtils;
 
 
 // Constants
-//////////////////////////////////////////////////////////////////////
 
 def LDAP_DEFAULT_UID = "cn";
 
 // Get configuration elements
-//////////////////////////////////////////////////////////////////////
 
 // Get the LDAP config instance
 def config = XWikiLDAPConfig.getInstance()

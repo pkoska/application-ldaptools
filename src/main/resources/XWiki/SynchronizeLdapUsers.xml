@@ -182,26 +182,24 @@
 <jobName>Execute LDAP synchronization batch</jobName>
 </property>
 <property>
-<script>/**
- * This jobs takes the synchronization list document (as defined in the LDAP section of the administration), and if this one is not empty, iterates over N entries, and synchronize them. N is the size of a synchronization batch and is also defined in the administration.
+<script>/*
+ * This jobs takes the synchronization list document (as defined in the LDAP section of the administration),
+ * and if this one is not empty, iterates over N entries, and synchronize them.
+ * N is the size of a synchronization batch and is also defined in the administration.
  */
 
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPConfig;
 import com.xpn.xwiki.XWikiException;
 import com.xpn.xwiki.doc.XWikiDocument;
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPConfig;
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPConnection;
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPSearchAttribute;
-import com.xpn.xwiki.plugin.ldap.XWikiLDAPUtils;
-
+import org.xwiki.contrib.ldap.XWikiLDAPConfig;
+import org.xwiki.contrib.ldap.XWikiLDAPConnection;
+import org.xwiki.contrib.ldap.XWikiLDAPSearchAttribute;
+import org.xwiki.contrib.ldap.XWikiLDAPUtils;
 
 // Constants
-//////////////////////////////////////////////////////////////////////
 
 def LDAP_DEFAULT_UID = "cn";
 
 // Get configuration elements
-//////////////////////////////////////////////////////////////////////
 
 // Get the LDAP config instance
 def config = XWikiLDAPConfig.getInstance()
@@ -229,7 +227,6 @@ if (listIsEmpty) {
 else {
 
     // Synchronize one batch
-    //////////////////////////////////////////////////////////////////////
 
     XWikiLDAPConnection connector = new XWikiLDAPConnection();
     XWikiLDAPUtils ldapUtils = new XWikiLDAPUtils(connector);
